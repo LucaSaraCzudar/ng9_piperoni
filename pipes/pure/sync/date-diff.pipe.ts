@@ -4,19 +4,24 @@
  *
  * This pipe returns the difference between the given date, plus formats the difference into a human-readable string.
  * Example usage: {{toDate | dateDiff:fromDate}}
+ *
+ * The difference between the default and strict mode is that the latter function
+ * won’t use approximate language such as ‘about 5 months’.
  */
 
 import { Pipe, PipeTransform } from '@angular/core';
-import { formatDistance } from 'date-fns';
+import {formatDistance, formatDistanceStrict} from 'date-fns';
 
 @Pipe({
   name: 'dateDiff'
 })
 export class DateDiffPipe implements PipeTransform {
 
-  transform(to: Date, from: Date, seconds = true): string {
+  transform(to: Date, from: Date, seconds = true, strict = false): string {
 
-    return formatDistance(to, from, { includeSeconds: seconds });
+    return strict ?
+      formatDistanceStrict(from, to) :
+      formatDistance(from, to, { includeSeconds: seconds });
   }
 
 }
