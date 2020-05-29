@@ -1,6 +1,14 @@
 /**
  * Credit goes to Lewis Fairweather @ JavaScript in Plain English on Medium
  * Source: https://medium.com/javascript-in-plain-english/6-pure-angular-pipes-for-human-readable-ui-c76b4e6fafa1
+ *
+ * The toSlugPipe Pipe transforms a URL to a slug. It strips any characters that are not allowed or irrelevant in URLs,
+ * including strings that could cause issues when used as a URL path/segment.
+ * toSlug uses a regular expression (Regex) to strip out non-URL compliant characters.
+ *
+ * The optional id parameter will append half of the passed id value to the end of the slug.
+ * This is useful if there is a chance that you’ll generate similar or duplicate slugs through this transformation.
+ * It makes sure that the slugs are unique, consequently making your apps URL’s unique.
  */
 
 import {Pipe, PipeTransform} from '@angular/core';
